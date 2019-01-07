@@ -2,6 +2,7 @@ package com.example.hawkt.test_osfoura
 
 import com.google.gson.annotations.SerializedName
 
+// Class supporting the manual client authentication attempt
 class OAuthToken
 {
 

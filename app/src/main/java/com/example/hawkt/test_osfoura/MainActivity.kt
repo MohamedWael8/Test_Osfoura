@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity()
     {
         super.onCreate(savedInstanceState)
 
+        //Twitter Configuration Code
         val config = TwitterConfig.Builder(this)
             .logger(DefaultLogger(Log.DEBUG))
             .twitterAuthConfig(
@@ -48,13 +49,14 @@ class MainActivity : AppCompatActivity()
             )
             .debug(true)
             .build()
+        //Twitter initialization code
         Twitter.initialize(config)
-        //var credentials = Credentials.basic(getString(CONSUMER_KEY),getString(CONSUMER_SECRET))
-        //var token: OAuthToken? = null
-        Log.d( "Keys" ,TwitterCore.getInstance().authConfig.consumerKey)
-        //Log.d( "TestSession" ,"H")
+
+
+
         setContentView(R.layout.activity_main)
 
+        //Retrofit Builder Design Code
         /*val retrofit =  Retrofit.Builder()
             .baseUrl("https://api.twitter.com/1.1/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -65,6 +67,9 @@ class MainActivity : AppCompatActivity()
             .build())
         .build()*/
 
+        //Attempt at creating a manual HTTPClient request with interceptors for logging and authorization
+        //var credentials = Credentials.basic(getString(CONSUMER_KEY),getString(CONSUMER_SECRET))
+        //var token: OAuthToken? = null
         /*val okHttpClient = OkHttpClient.Builder().addInterceptor(object : Interceptor
         {
             @Throws(IOException::class)
@@ -92,10 +97,11 @@ class MainActivity : AppCompatActivity()
         }).build()*/
 
 
-    //
-
+        // UserServices is an Interface with a companion object that calls the search, show, and postCredentials
        val userServices = UserServices
-       /* val call = userServices.create().search("mwael8" , 1 , 5 , false)
+
+        // 1.1/users/search function Get http request that searches for users with against a string
+        /*val call = userServices.create().search("mwael8" , 1 , 5 , false)
         call.enqueue(
             object : Callback<List<User>>() {
                 override fun success(result: Result<List<User>>) {
@@ -110,6 +116,9 @@ class MainActivity : AppCompatActivity()
                 }
             }
         )*/
+
+        //Attempt at 1.1/users/show get request that returns a specific user (Returns a 401)
+        /*
         val call2 = userServices.create().show(null,395571736,1,false)
         call2.enqueue(
             object : Callback<User>() {
@@ -124,12 +133,13 @@ class MainActivity : AppCompatActivity()
                     Log.d("UserTest2", "E" + exception.toString())
                 }
             }
-        )
+        )*/
 
 
 
 
-        //Return userTimeLine
+        //Return userTimeLine in variable result as a List of results to access it type result.data.items[iterator] if you want
+        // the next user's timeline we call the function next which returns a result(TimelineResult<Tweet>) as well timeline
         /*
         val userTimeline = UserTimeline.Builder().screenName("mwael8").maxItemsPerRequest(2).build()
         userTimeline.next(null , object : Callback<TimelineResult<Tweet>>()
@@ -147,7 +157,7 @@ class MainActivity : AppCompatActivity()
           })
          */
 
-        //Returns Tweet with specific id
+        //Returns Tweet with specific id in a tweet module (class)
 
         /*val twitterApiClient = TwitterCore.getInstance().apiClient
         val statusesService = twitterApiClient.statusesService

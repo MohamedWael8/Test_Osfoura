@@ -23,8 +23,10 @@ import okhttp3.logging.HttpLoggingInterceptor
 import java.io.IOException
 
 
+//Interface that holds the Http Requests their details and the Companion Object for calling them
 interface UserServices
 {
+
     @FormUrlEncoded
     @POST("oauth2/token")
     fun postCredentials(@Field("grant_type") grantType: String): Call<OAuthToken>
@@ -61,7 +63,7 @@ interface UserServices
             })
             logging.setLevel(HttpLoggingInterceptor.Level.HEADERS)
             val httpClient = OkHttpClient.Builder().addInterceptor(logging).build()*/
-
+            //Custom Logging attempt B
             /*val httpClient = OkHttpClient.Builder().addInterceptor(object : Interceptor
             {
                 @Throws(IOException::class)
@@ -88,7 +90,7 @@ interface UserServices
                 .build()
             return retrofit.create(UserServices::class.java)
         }
-
+        //Attempt : Overloaded function create so that we can send it the client directly
        fun create( httpClient : OkHttpClient) : UserServices
        {
            val retrofit =  Retrofit.Builder()
@@ -99,6 +101,7 @@ interface UserServices
            return retrofit.create(UserServices::class.java)
        }
 
+        //Gson Builder part of Companion object for Parsing
        private fun buildGson(): Gson {
            return GsonBuilder()
                .registerTypeAdapterFactory(SafeListAdapter())
